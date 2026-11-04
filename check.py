@@ -2,25 +2,24 @@ import requests, json, os, sys
 from urllib.parse import urljoin
 from bs4 import BeautifulSoup
 
-URL = "https://cfc.scenecinemas.com/"
+URL = "https://cfc.scenecinemas.com/home"
 TOKEN = os.environ["TOKEN"]
 CHAT_ID = os.environ["CHAT_ID"]
 FILE = "seen.json"
 
-html = requests.get(URL, timeout=80, headers={"User-Agent": "Mozilla/5.0"}).text
+html = requests.get(URL, timeout=20, headers={"User-Agent": "Mozilla/5.0"}).text
 soup = BeautifulSoup(html, "html.parser")
 
 movies = {}
-for a in soup.select('a[href="/movie-details/"]'):
+for a in soup.select('a[href*="/movie-details/"]'):
     name = a.get("title") or a.get_text(strip=True)
     if name:
         movies[a["href"]] = name
 
-print(f"لقيت {len(movies)} فيلم")
-
+print("لقيت", len(movies), "فيلم")
 if not movies:
-    print("مفيش أفلام اتقرات")
-    sys.exit()
+    print("مفيش أفلام اتقرأت")
+    sys.exit(1)
 
 seen = set(json.load(open(FILE))) if os.path.exists(FILE) else None
 
@@ -30,7 +29,7 @@ if seen is not None:
             f"https://api.telegram.org/bot{TOKEN}/sendMessage",
             params={
                 "chat_id": CHAT_ID,
-                "text": f"فيلم جديد نزل : {movies[href]}\n{urljoin(URL, href)}"
+                "text": f"فيلم جديد نزل:\n{movies[href]}\n{urljoin(URL, href)}",
             },
         )
 

@@ -12,8 +12,8 @@ FILE = "seen.json"
 with sync_playwright() as p:
     browser = p.chromium.launch(headless=True)
     page = browser.new_page()
-    page.goto(URL, timeout=60000)
-    page.wait_for_timeout(5000)  # انتظار تحميل الصفحة بالكامل
+    page.goto(URL, timeout=60)
+    page.wait_for_timeout(50)  # انتظار تحميل الصفحة بالكامل
     html = page.content()
     browser.close()
 

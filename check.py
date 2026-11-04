@@ -2,7 +2,7 @@ import requests, json, os, sys
 from urllib.parse import urljoin
 from bs4 import BeautifulSoup
 
-URL = "https://egy.voxcinemas.com/showtimes?c=city-centre-almaza"  # الرابط الأصلي المذكور في الدليل
+URL = "https://district5.scenecinemas.com/home"  # الرابط الأصلي المذكور في الدليل
 TOKEN = os.environ["TOKEN"]
 CHAT_ID = os.environ["CHAT_ID"]
 FILE = "seen.json"

@@ -2,7 +2,7 @@ import requests, json, os, sys
 from urllib.parse import urljoin
 from bs4 import BeautifulSoup
 
-URL = "https://cfc.scenecinemas.com/?_gl=1*1jfiany*_ga*MTM0MzkwNDg1LjE3OTM4MTAyNTM.*_ga_56Y0TS6WVR*czE3OTM4MTAyNTIkbzEkZzAkdDE3OTM4MTAyNTIkajYwJGwwJGgw"
+URL = "https://egy.voxcinemas.com/showtimes?c=city-centre-almaza"
 TOKEN = os.environ["TOKEN"]
 CHAT_ID = os.environ["CHAT_ID"]
 FILE = "seen.json"
